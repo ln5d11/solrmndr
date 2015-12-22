@@ -10,7 +10,7 @@ public class MainWindow extends JFrame {
 
     public static final String MAIN_WINDOW_NAME = "Solution Reminder";
     public static final String VERSION = "0.00001";
-    public static final int MAIN_WINDOW_WIDTH = 600;
+    public static final int MAIN_WINDOW_WIDTH = 800;
     public static final int MAIN_WINDOW_HEIGHT = 400;
 
     public MainWindow() throws HeadlessException {
@@ -19,14 +19,22 @@ public class MainWindow extends JFrame {
         initGui();
         setLocationRelativeTo(null);
         setVisible(true);
+
     }
 
     /**
      * В методе инициализируются компоненты которые содержат основные компоненты
      */
     protected void initGui() {
-
+        initTable();
     }
 
+    private void initTable () {
+        JTable table = new JTable(new TableModel());
+        table.setAutoCreateRowSorter(true);
+        table.setBackground(Color.WHITE);
+        JScrollPane tableScrollPane = new JScrollPane(table);
+        add(tableScrollPane);
+    }
 
 }
