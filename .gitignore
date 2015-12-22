@@ -1,6 +1,6 @@
 *.class
-out/
-target/
+out/*
+target/*
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
