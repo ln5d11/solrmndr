@@ -11,31 +11,32 @@ public class TableModel extends AbstractTableModel {
     };
 
     @Override
-    public int getRowCount()
-    {return data.length;}
+    public int getRowCount() {
+        return data.length;
+    }
 
     @Override
-    public int getColumnCount()
-    {return columnNames.length;}
+    public int getColumnCount() {
+        return columnNames.length;
+    }
 
     @Override
-    public Object getValueAt(int row, int column)
-    {return data[row][column];}
+    public Object getValueAt(int row, int column) {
+        return data[row][column];
+    }
 
     @Override
-    public String getColumnName(int column)
-    {return columnNames[column];}
+    public String getColumnName(int column) {
+        return columnNames[column];
+    }
 
     @Override
-    public Class getColumnClass(int c)
-    {return getValueAt(0, c).getClass();}
+    public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
 
     @Override
-    public boolean isCellEditable(int row, int column)
-    {
-        if (column == 0 || column == 1)
-        {return false;}
-        else
-        {return true;}
+    public boolean isCellEditable(int row, int column) {
+        return column !=0 && column != 1;
     }
 }
