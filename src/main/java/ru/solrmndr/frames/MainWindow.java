@@ -1,5 +1,7 @@
 package ru.solrmndr.frames;
 
+import ru.solrmndr.utils.ApplicationConfig;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,18 +10,15 @@ import java.awt.*;
  */
 public class MainWindow extends JFrame {
 
-    public static final String MAIN_WINDOW_NAME = "Solution Reminder";
-    public static final String VERSION = "0.00001";
-    public static final int MAIN_WINDOW_WIDTH = 800;
-    public static final int MAIN_WINDOW_HEIGHT = 400;
+    JTable mainDataTable;
 
     public MainWindow() throws HeadlessException {
-        setTitle(MAIN_WINDOW_NAME + " v." + VERSION);
-        setSize(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
+        setTitle(ApplicationConfig.MAIN_WINDOW_NAME + " v." + ApplicationConfig.VERSION);
+        setSize(ApplicationConfig.MAIN_WINDOW_WIDTH, ApplicationConfig.MAIN_WINDOW_HEIGHT);
         initGui();
         setLocationRelativeTo(null);
         setVisible(true);
-
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     /**
@@ -30,10 +29,10 @@ public class MainWindow extends JFrame {
     }
 
     private void initTable () {
-        JTable table = new JTable(new TableModel());
-        table.setAutoCreateRowSorter(true);
-        table.setBackground(Color.WHITE);
-        JScrollPane tableScrollPane = new JScrollPane(table);
+        mainDataTable = new JTable(new TableModel());
+        mainDataTable.setAutoCreateRowSorter(true);
+        mainDataTable.setBackground(Color.WHITE);
+        JScrollPane tableScrollPane = new JScrollPane(mainDataTable);
         add(tableScrollPane);
     }
 
