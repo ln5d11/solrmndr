@@ -1,11 +1,8 @@
 package ru.solrmndr.frames;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.awt.*;
 
 public class TableModel extends JTable {
 
@@ -51,15 +48,15 @@ public class TableModel extends JTable {
     }
 
     private DefaultCellEditor getDateCellEditor() {
-        final InputVerifier dateVerifyer = getDateVerifyer();
+        final InputVerifier dateVerifier = getDateVerifier();
         DefaultCellEditor editor = new DefaultCellEditor(new JTextField()) {
             {
-                getComponent().setInputVerifier(dateVerifyer);
+                getComponent().setInputVerifier(dateVerifier);
             }
 
             @Override
             public boolean stopCellEditing() {
-                if (!dateVerifyer.shouldYieldFocus(getComponent())) {
+                if (!dateVerifier.shouldYieldFocus(getComponent())) {
                     return false;
                 }
                 return super.stopCellEditing();
@@ -74,7 +71,7 @@ public class TableModel extends JTable {
         return editor;
     }
 
-    private InputVerifier getDateVerifyer() {
+    private InputVerifier getDateVerifier() {
         final String dateRegEx = "(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[012])\\.(19|20)\\d\\d";
         return new InputVerifier() {
             @Override
