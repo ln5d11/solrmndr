@@ -29,7 +29,7 @@ public class MainWindow extends JFrame {
     }
 
     private void initTable () {
-        mainDataTable = new JTable(new TableModel());
+        mainDataTable = new TableModel();
         mainDataTable.setAutoCreateRowSorter(true);
         mainDataTable.setBackground(Color.WHITE);
         JScrollPane tableScrollPane = new JScrollPane(mainDataTable);
