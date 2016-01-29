@@ -3,6 +3,8 @@ package ru.solrmndr.frames;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TableModel extends JTable {
 
@@ -13,6 +15,8 @@ public class TableModel extends JTable {
 
     Object[] data = {"C2H5OH", "10%", "ml", "21.12.15", "30.01.16", "-", " "};
 
+    Object[] empty = {"", "", "", "", "", "", ""};
+
     public TableModel() {
         setModel(tableModel);
         initColumns();
@@ -21,6 +25,10 @@ public class TableModel extends JTable {
         getColumnModel().getColumn(3).setCellEditor(getDateCellEditor());
         getColumnModel().getColumn(4).setCellEditor(getDateCellEditor());
         setUpConditionCol(getColumnModel().getColumn(5));
+    }
+
+    public void addEmptyRow() {
+        tableModel.addRow(empty);
     }
 
     private void initColumns() {
