@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class TableDataController {
 
     private static final String DATA_FILE = TableDataController.class.getClassLoader().getResource("resources/data.txt").getFile();
-    private static final String SEPORATOR = ",";
+    private static final String SEPARATOR = ",";
 
     public static ArrayList<String[]> loadData() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE));
@@ -18,12 +18,12 @@ public class TableDataController {
         ArrayList<String[]> data = new ArrayList<String[]>();
         try {
             while ((line = reader.readLine()) != null) {
-                data.add(line.split(SEPORATOR));
+                data.add(line.split(SEPARATOR));
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            reader.close();
+            reader.
         }
         return data;
     }
