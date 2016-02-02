@@ -11,9 +11,7 @@ public class ToolbarPanel extends JPanel {
 
     public ToolbarPanel() {
         setLayout(new FlowLayout(FlowLayout.LEFT, 2, 5));
-        //setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
-        ImageIcon addRow = new ImageIcon("C:\\addrow.png");
+        ImageIcon addRow = new ImageIcon(getClass().getClassLoader().getResource("resources/row_add_after.png"));
         addRowButton = new JButton(addRow);
         addRowButton.setPreferredSize(new Dimension (25, 25));
         addRowButton.setBackground(Color.WHITE);

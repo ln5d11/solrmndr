@@ -1,10 +1,14 @@
 package ru.solrmndr.frames;
 
+import ru.solrmndr.controller.TableDataController;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class TableModel extends JTable {
 
@@ -13,22 +17,28 @@ public class TableModel extends JTable {
     String[] columnNames = {"Название раствора", "Концентрация", "Ед. измерения", "Дата изготовления", "Годен до",
             "Особые условия", " "};
 
-    Object[] data = {"C2H5OH", "10%", "ml", "21.12.15", "30.01.16", "-", " "};
-
-    Object[] empty = {"", "", "", "", "", "", ""};
-
     public TableModel() {
         setModel(tableModel);
         initColumns();
-        tableModel.addRow(data);
         setUpUnitCol(getColumnModel().getColumn(2));
         getColumnModel().getColumn(3).setCellEditor(getDateCellEditor());
         getColumnModel().getColumn(4).setCellEditor(getDateCellEditor());
         setUpConditionCol(getColumnModel().getColumn(5));
+        prepareData();
+    }
+
+    private void prepareData() {
+        try {
+            for(String[] data : TableDataController.loadData()) {
+                tableModel.addRow(data);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addEmptyRow() {
-        tableModel.addRow(empty);
+        tableModel.addRow(new String[]{"", "", "", "", "", "", ""});
     }
 
     private void initColumns() {
@@ -57,17 +67,14 @@ public class TableModel extends JTable {
 
     private DefaultCellEditor getDateCellEditor() {
         final InputVerifier dateVerifier = getDateVerifier();
-        DefaultCellEditor editor = new DefaultCellEditor(new JTextField()) {
+        return new DefaultCellEditor(new JTextField()) {
             {
                 getComponent().setInputVerifier(dateVerifier);
             }
 
             @Override
             public boolean stopCellEditing() {
-                if (!dateVerifier.shouldYieldFocus(getComponent())) {
-                    return false;
-                }
-                return super.stopCellEditing();
+                return dateVerifier.shouldYieldFocus(getComponent()) && super.stopCellEditing();
             }
 
             @Override
@@ -76,7 +83,6 @@ public class TableModel extends JTable {
             }
 
         };
-        return editor;
     }
 
     private InputVerifier getDateVerifier() {
