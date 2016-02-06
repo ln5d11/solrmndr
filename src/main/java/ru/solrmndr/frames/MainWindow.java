@@ -1,5 +1,6 @@
 package ru.solrmndr.frames;
 
+import ru.solrmndr.controller.TableDataController;
 import ru.solrmndr.utils.ApplicationConfig;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 public class MainWindow extends JFrame {
 
     TableModel mainDataTable;
+    TableDataController tdc;
     ToolbarPanel toolBar;
     JPanel mainPanel;
 
@@ -56,7 +58,17 @@ public class MainWindow extends JFrame {
                 addRow();
             }
         });
+
+        toolBar.getSaveButton().addActionListener( new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                tdc = new TableDataController();
+                tdc.saveData();
+            }
+        });
     }
+
 
     private void addRow() {
         mainDataTable.addEmptyRow();

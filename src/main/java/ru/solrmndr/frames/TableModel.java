@@ -5,8 +5,6 @@ import ru.solrmndr.controller.TableDataController;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,6 +23,35 @@ public class TableModel extends JTable {
         getColumnModel().getColumn(4).setCellEditor(getDateCellEditor());
         setUpConditionCol(getColumnModel().getColumn(5));
         prepareData();
+    }
+
+    public void prepareToSaveData() {
+        ArrayList<String> rows = new ArrayList<String>();
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            ArrayList<String> rowlist = new ArrayList<String>();
+            for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                if ((tableModel.getValueAt(i, j) != null)) {
+                    rowlist.add((String) tableModel.getValueAt(i, j));
+                } else {
+                    rowlist.add(" ");
+                }
+            }
+            String listString = "";
+                for (String s : rowlist) {
+                    listString += s + ", ";
+                }
+            rows.add(listString);
+            //rows.add("\n");
+        }
+        String complete = "";
+        for (String s : rows) {
+            complete += s;
+        }
+        getSavedData(complete);
+    }
+
+   public static String getSavedData(String complete) {
+        return complete;
     }
 
     private void prepareData() {
