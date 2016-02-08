@@ -41,18 +41,15 @@ public class TableModel extends JTable {
                     listString += s + ", ";
                 }
             rows.add(listString);
-            //rows.add("\n");
+            //  rows.add("\n");
         }
         String complete = "";
         for (String s : rows) {
             complete += s;
         }
-        getSavedData(complete);
+        TableDataController.saveData(complete);
     }
 
-   public static String getSavedData(String complete) {
-        return complete;
-    }
 
     private void prepareData() {
         try {

@@ -29,13 +29,11 @@ public class TableDataController {
         return data;
     }
 
-    public void saveData() {
+    public static void saveData(String data) {
         BufferedWriter writer = null;
-        String s = "";
-        TableModel.getSavedData(s);
         try {
             writer = new BufferedWriter(new FileWriter(DATA_FILE));
-            writer.write(s);
+            writer.write(data);
 
         } catch (IOException e) {
             e.printStackTrace();

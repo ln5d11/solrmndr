@@ -63,8 +63,7 @@ public class MainWindow extends JFrame {
         {
             public void actionPerformed(ActionEvent e)
             {
-                tdc = new TableDataController();
-                tdc.saveData();
+                mainDataTable.prepareToSaveData();
             }
         });
     }
